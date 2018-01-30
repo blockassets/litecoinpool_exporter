@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lookfirst/litecoinpool_exporter.svg?branch=master)](https://travis-ci.org/lookfirst/litecoinpool_exporter)
 
-# BW Exporter
+# Litecoinpool Exporter
 
 [Prometheus.io](https://prometheus.io/) exporter for the [litecoinpool.org](https://litecoinpool.org) API.
 
