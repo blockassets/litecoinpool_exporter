@@ -4,7 +4,7 @@
 
 [Prometheus.io](https://prometheus.io/) exporter for the [litecoinpool.org](https://litecoinpool.org) API.
 
-Thanks to [HyperBit.io](https://hyperbitshop.io) for sponsoring this project.
+Thanks to [HyperBitShop.io](https://hyperbitshop.io) for sponsoring this project.
 
 ### Usage (defaults):
 
