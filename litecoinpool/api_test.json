@@ -1,0 +1,62 @@
+{
+  "user": {
+	"hash_rate": 187354349,
+	"expected_24h_rewards": 1.01037317042,
+	"total_rewards": 1.4898754336,
+	"paid_rewards": 1,
+	"unpaid_rewards": 1.4898754335637,
+	"past_24h_rewards": 2.132397627773,
+	"total_work": "000077177713885184",
+	"blocks_found": 1
+  },
+  "workers": {
+	"NAME.1": {
+	  "connected": true,
+	  "hash_rate": 199310.8,
+	  "hash_rate_24h": 133975.3,
+	  "valid_shares": "900765502976",
+	  "stale_shares": "909415168",
+	  "invalid_shares": "80247",
+	  "rewards": 1.196998671636,
+	  "rewards_24h": 0.00401437913088,
+	  "last_share_time": 1517124416,
+	  "reset_time": 1512630506
+	},
+	"NAME.10": {
+	  "connected": true,
+	  "hash_rate": 104080.4,
+	  "hash_rate_24h": 187732.3,
+	  "valid_shares": "90006318976",
+	  "stale_shares": "90048608",
+	  "invalid_shares": "10070",
+	  "rewards": 1.729890630639,
+	  "rewards_24h": 0.00060137539584,
+	  "last_share_time": 1517124417,
+	  "reset_time": 1513068338
+	}
+  },
+  "pool": {
+	"hash_rate": 28840000000,
+	"active_users": 9914,
+	"total_work": "145016027186199134208",
+	"pps_ratio": 1.03,
+	"pps_rate": 1.05305e-10
+  },
+  "network": {
+	"hash_rate": 95925913949,
+	"block_number": 1358312,
+	"time_per_block": 167,
+	"difficulty": 3731199.1833743,
+	"next_difficulty": 3854043.0221471,
+	"retarget_time": 78852
+  },
+  "market": {
+	"ltc_btc": 0.01576,
+	"ltc_usd": 183.02,
+	"ltc_eur": 148.64,
+	"ltc_gbp": 131.13855,
+	"ltc_rub": 10444.23225,
+	"ltc_cny": 1172.85335,
+	"btc_usd": 11761.7
+  }
+}

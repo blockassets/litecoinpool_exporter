@@ -1,0 +1,5 @@
+.idea
+*.iml
+vendor
+litecoinpool_exporter
+litecoinpool-api-key.txt

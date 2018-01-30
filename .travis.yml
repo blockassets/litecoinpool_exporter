@@ -1,0 +1,33 @@
+language: go
+go:
+  - 1.x
+env:
+  - DEP_VERSION="v0.4.1"
+before_install:
+  - curl -L -s https://github.com/golang/dep/releases/download/${DEP_VERSION}/dep-linux-amd64 -o $GOPATH/bin/dep
+  - chmod +x $GOPATH/bin/dep
+install:
+  - dep ensure
+stages:
+  - test
+  - name: deploy
+    if: branch = master
+jobs:
+  include:
+    - stage: test
+      script: "make test"
+    - stage: deploy
+      script: "make amd64"
+      before_deploy:
+        # Set up git user name and tag this commit
+        - git config --local user.name "lookfirst"
+        - git config --local user.email "latchkey@gmail.com"
+        - git tag "$(date '+%Y%m%d-%H%M%S')-$(git log --format=%h -1)-amd64"
+      deploy:
+        provider: releases
+        file: litecoinpool_exporter
+        skip_cleanup: true
+        api_key:
+          secure: UWk9LTyIvD4fGal1rgtH/dEDguoFxBm8BrEhvOq7cayORNnMh2aCyyIrnTNn73aY5HbAB4+uYU1I6Xo2PwkgwjClo17jBDDUr7jaonYMbYsmLd40kyXAMsYMU8zy+AiTsY1nqemRXvPN+pyBO/2Fmo9RtgiLzLK3GDy43xjCFlJOJvKJJq4V6w9Vid7zszO5lD9uBuel4Tq1qyJl5hVC5Mb+dYZqu/ngFBc5soIzIw8NZN9G1UFz1zJPXMIgmfixIsZAPs6K2Mh/u5kTYK6xuREXnWgc4IF4ZOKqE6CWLPLLuCKUbIgK7RvWVoFEBd/oe6JgOI9fOHfYgW6voCz7i7h0uuAgOaFk/3PAusFz7Dw32twkyBdg4niRl+RMFGYl3kXpPwM6ntVsEe5SAIXCkGpTILs668nRcW4gQ0laQa/d38ewSV9zkRQON5eQutOXNLbGjZqIhVAPplBumTHY/YEc/KboPQoUYAb7wWbKhmEc9gO/GUCX2A4yBKgV2jcucxqt9sK190WCjw+Z4Qj3cOUqaMOiy3vlQ17Aq52WVdByWBqnedkuUqGWDhWoctuGrGE8/l7QcuWU5eiD2pT95iDEEN/9IXQ1H3xIpT4F/JZHWoG7x0fq9r7/iuW4TBIEBcQW5DWu3h2ZSeSWAi7jjt6IkhMfx7m7r88SO2239KU=
+        on:
+          repo: lookfirst/litecoinpool_exporter
