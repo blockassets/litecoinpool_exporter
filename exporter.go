@@ -46,12 +46,13 @@ type GaugeVecMap map[string]prometheus.GaugeVec
 
 // Collector interface
 type Exporter struct {
-	client  *litecoinpool.LCPClient
-	User    GaugeMap
-	Workers map[string]GaugeVecMap
-	Pool    GaugeMap
-	Network GaugeMap
-	Market  GaugeMap
+	client      *litecoinpool.LCPClient
+	constLabels prometheus.Labels
+	User        GaugeMap
+	Workers     map[string]GaugeVecMap
+	Pool        GaugeMap
+	Network     GaugeMap
+	Market      GaugeMap
 	sync.Mutex
 }
 
@@ -71,7 +72,7 @@ func fmtGaugeDescription(interfaceName string, tag string) string {
 }
 
 //
-func newGaugeMap(api interface{}) GaugeMap {
+func newGaugeMap(api interface{}, constLabels prometheus.Labels) GaugeMap {
 	interfaceName := lookupStructName(api)
 	tags := lookupStructTags(api)
 
@@ -81,7 +82,7 @@ func newGaugeMap(api interface{}) GaugeMap {
 		gauge := newGauge(
 			gaugeName,
 			fmtGaugeDescription(interfaceName, tag),
-			nil)
+			constLabels)
 		metrics[gaugeName] = gauge
 	}
 
@@ -89,7 +90,7 @@ func newGaugeMap(api interface{}) GaugeMap {
 }
 
 //
-func newGaugeVecMap(api interface{}, labels []string) GaugeVecMap {
+func newGaugeVecMap(api interface{}, labels []string, constLabels prometheus.Labels) GaugeVecMap {
 	interfaceName := lookupStructName(api)
 	tags := lookupStructTags(api)
 
@@ -98,7 +99,7 @@ func newGaugeVecMap(api interface{}, labels []string) GaugeVecMap {
 		gaugeName := fmtGaugeName(interfaceName, tag)
 		metrics[gaugeName] = newGaugeVec(fmtGaugeName(interfaceName, tag),
 			fmtGaugeDescription(interfaceName, tag),
-			nil, labels)
+			constLabels, labels)
 	}
 
 	return metrics
@@ -106,13 +107,15 @@ func newGaugeVecMap(api interface{}, labels []string) GaugeVecMap {
 
 //
 func NewExporter(apiKey string, timeout time.Duration) *Exporter {
+	constLabels := prometheus.Labels{"key": apiKey[:8]}
 	return &Exporter{
-		client:  litecoinpool.NewClient(apiKey, timeout),
-		Workers: make(map[string]GaugeVecMap),
-		User:    newGaugeMap(litecoinpool.User{}),
-		Pool:    newGaugeMap(litecoinpool.Pool{}),
-		Network: newGaugeMap(litecoinpool.Network{}),
-		Market:  newGaugeMap(litecoinpool.Market{}),
+		client:      litecoinpool.NewClient(apiKey, timeout),
+		constLabels: constLabels,
+		Workers:     make(map[string]GaugeVecMap),
+		User:        newGaugeMap(litecoinpool.User{}, constLabels),
+		Pool:        newGaugeMap(litecoinpool.Pool{}, constLabels),
+		Network:     newGaugeMap(litecoinpool.Network{}, constLabels),
+		Market:      newGaugeMap(litecoinpool.Market{}, constLabels),
 	}
 }
 
@@ -166,7 +169,7 @@ func setFieldsOnGaugeVecs(e *Exporter, poolData *litecoinpool.PoolData) {
 	for name, worker := range workers {
 		// Workers are generated on each request
 		if _, ok := e.Workers[name]; !ok {
-			e.Workers[name] = newGaugeVecMap(litecoinpool.Worker{}, idLabelNames)
+			e.Workers[name] = newGaugeVecMap(litecoinpool.Worker{}, idLabelNames, e.constLabels)
 		}
 
 		setFieldsOnGaugeVec(e.Workers[name], worker, name)
