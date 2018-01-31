@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -21,7 +22,7 @@ var (
 func main() {
 	apiKey := os.Getenv("LITECOINPOOL_API_KEY")
 	keyFile := flag.String("key-file", "./litecoinpool-api-key.txt", "Path to a file that has the API key in it.")
-	port := flag.String("port", ":5551", "The address to listen on for /metrics HTTP requests.")
+	port := flag.String("port", "5551", "The address to listen on for /metrics HTTP requests.")
 	timeout := flag.Duration("timeout", 5*time.Second, "The amount of time to wait for litecoinpool to return.")
 	flag.Parse()
 
@@ -38,5 +39,5 @@ func main() {
 
 	http.Handle("/metrics", promhttp.Handler())
 	log.Printf("%s %s", os.Args[0], version)
-	log.Fatal(http.ListenAndServe(*port, nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", *port), nil))
 }
