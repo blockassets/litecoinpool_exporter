@@ -58,6 +58,16 @@ var floatType = reflect.TypeOf(float64(0))
 func ConvertToFloat(unk interface{}) (float64, error) {
 	v := reflect.ValueOf(unk)
 	v = reflect.Indirect(v)
+
+	// Why not supported by the language?
+	if v.Type().Name() == "bool" {
+		if v.Bool() {
+			return 1, nil
+		} else {
+			return 0, nil
+		}
+	}
+
 	if !v.Type().ConvertibleTo(floatType) {
 		return 0, fmt.Errorf("cannot convert %v to float64", v.Type())
 	}

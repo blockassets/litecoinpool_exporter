@@ -15,7 +15,7 @@ import (
 //
 var (
 	namespace    = "lcp"
-	idLabelNames = []string{"id", "connected"}
+	idLabelNames = []string{"id"}
 )
 
 //
@@ -140,24 +140,18 @@ func setFieldsOnGauge(gaugeMap GaugeMap, strct interface{}) {
 //
 func setFieldsOnGaugeVec(gaugeVecMap GaugeVecMap, strct interface{}, labelValue string) {
 	interfaceName := lookupStructName(strct)
-
 	structValue := reflect.ValueOf(strct)
-	var connected string
+
 	for i := 0; i < structValue.NumField(); i++ {
 		value := structValue.Field(i).Interface()
-
-		// Special case the Worker.Connected field into a label
-		if i == 0 {
-			connected = fmt.Sprint(value)
-			continue
-		}
 
 		flt, err := ConvertToFloat(value)
 		if err == nil {
 			key := structValue.Type().Field(i).Tag.Get("json")
-			gauge, ok := gaugeVecMap[fmtGaugeName(interfaceName, key)]
+			gaugeName := fmtGaugeName(interfaceName, key)
+			gauge, ok := gaugeVecMap[gaugeName]
 			if ok {
-				gauge.WithLabelValues(labelValue, connected).Set(flt)
+				gauge.WithLabelValues(labelValue).Set(flt)
 			}
 		}
 	}
