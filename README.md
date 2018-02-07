@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lookfirst/litecoinpool_exporter.svg?branch=master)](https://travis-ci.org/lookfirst/litecoinpool_exporter)
+[![Build Status](https://travis-ci.org/blockassets/litecoinpool_exporter.svg?branch=master)](https://travis-ci.org/blockassets/litecoinpool_exporter)
 
 # Litecoinpool Exporter
 
@@ -31,7 +31,7 @@ Install [dep](https://github.com/golang/dep) and the dependencies...
 
 ### Install onto miner
 
-The [releases tab](https://github.com/lookfirst/litecoinpool_exporter/releases) has `master` binaries cross compiled for AMD64. These are built automatically on [Travis](https://travis-ci.org/lookfirst/litecoinpool_exporter).
+The [releases tab](https://github.com/blockassets/litecoinpool_exporter/releases) has `master` binaries cross compiled for AMD64. These are built automatically on [Travis](https://travis-ci.org/blockassets/litecoinpool_exporter).
 
 Download the latest release and copy the `litecoinpool_exporter` binary to `/usr/local/bin`
 
