@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lookfirst/litecoinpool_exporter/litecoinpool"
+	"github.com/blockassets/litecoinpool_exporter/litecoinpool"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
