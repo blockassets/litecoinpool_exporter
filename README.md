@@ -9,7 +9,7 @@ Thanks to [HyperBitShop.io](https://hyperbitshop.io) for sponsoring this project
 ### Usage (defaults):
 
 ``
-LITECOINPOOL_API_KEY=2l3kj2l3kj43lj ./litecoinpool_exporter -port 5551 -timeout 5s
+LITECOINPOOL_API_KEY=2l3kj2l3kj43lj ./litecoinpool_exporter -port 5551 -timeout 10s
 ``
 
 If you don't want to specify the API key in the environment, you can do it in a file:
