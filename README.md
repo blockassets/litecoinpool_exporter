@@ -19,6 +19,8 @@ echo "l2j3l4k23j4l3j" > ./litecoinpool-api-key.txt
 ./litecoinpool_exporter -key-file litecoinpool-api-key.txt
 ``
 
+Note: if you remove a worker, you need to restart the exporter.
+
 ### Setup
 
 Install [dep](https://github.com/golang/dep) and the dependencies...
