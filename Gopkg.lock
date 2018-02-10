@@ -9,9 +9,15 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/blockassets/prometheus_helper"
+  packages = ["."]
+  revision = "cff2f41255f0b7182e5b04ae3d181525639f585e"
+
+[[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
   revision = "925541529c1fa6821df4e44ce2723319eb2be768"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/json-iterator/go"
@@ -27,7 +33,10 @@
 
 [[projects]]
   name = "github.com/prometheus/client_golang"
-  packages = ["prometheus","prometheus/promhttp"]
+  packages = [
+    "prometheus",
+    "prometheus/promhttp"
+  ]
   revision = "c5b7fccd204277076155f10851dad72b76a49317"
   version = "v0.8.0"
 
@@ -40,18 +49,27 @@
 [[projects]]
   branch = "master"
   name = "github.com/prometheus/common"
-  packages = ["expfmt","internal/bitbucket.org/ww/goautoneg","model"]
+  packages = [
+    "expfmt",
+    "internal/bitbucket.org/ww/goautoneg",
+    "model"
+  ]
   revision = "89604d197083d4781071d3c65855d24ecfb0a563"
 
 [[projects]]
   branch = "master"
   name = "github.com/prometheus/procfs"
-  packages = [".","internal/util","nfs","xfs"]
+  packages = [
+    ".",
+    "internal/util",
+    "nfs",
+    "xfs"
+  ]
   revision = "cb4147076ac75738c9a7d279075a253c0cc5acbd"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1b8e68242c4bb82783ceae37f3a499222a0be7dcc6e8f9cafcc2c8ab14ed27a7"
+  inputs-digest = "0603945b8b52948555c7a5a58b5b217951c5af9c69ffb40d24758572555235c1"
   solver-name = "gps-cdcl"
   solver-version = 1
