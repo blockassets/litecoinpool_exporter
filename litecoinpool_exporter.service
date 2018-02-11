@@ -4,7 +4,7 @@ After=init.service
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/litecpoinpool_exporter -key-file /usr/local/etc/litecoinpool-api-key.txt
+ExecStart=/usr/local/bin/litecoinpool_exporter -key-file /usr/local/etc/litecoinpool-api-key.txt
 Restart=always
 RestartSec=4s
 StandardOutput=journal+console
