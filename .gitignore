@@ -2,4 +2,5 @@
 *.iml
 vendor
 litecoinpool_exporter
+litecoinpool_exporter*.gz
 litecoinpool-api-key.txt
