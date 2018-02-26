@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"runtime"
 	"strings"
 	"time"
 
@@ -62,7 +61,7 @@ func overseerRun(port string, interval time.Duration) {
 }
 
 func prog(state overseer.State) {
-	log.Printf("%s %s %s %s on port %s\n", os.Args[0], version, runtime.GOOS, runtime.GOARCH, state.Address)
+	log.Printf("%s %s on port %s\n", os.Args[0], version, state.Address)
 
 	if len(apiKey) == 0 {
 		dat, err := ioutil.ReadFile(*keyFile)
