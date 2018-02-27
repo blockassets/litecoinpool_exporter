@@ -1,27 +1,24 @@
 language: go
 go:
-  - 1.x
+- 1.x
 before_install:
 - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 install:
 - dep ensure
 stages:
-  - test
-  - name: deploy-amd64
-    if: branch = master
-  - name: deploy-darwin
-    if: branch = master
+- test
+- name: deploy
+  if: branch = master
 jobs:
   include:
   - stage: test
-    script: "make test"
+    script: make test
   - stage: deploy
-    script: "make gzip"
+    script: make gzip
     before_deploy:
-      # Set up git user name and tag this commit
-      - git config --local user.name "lookfirst"
-      - git config --local user.email "latchkey@gmail.com"
-      - git tag "$(date '+%Y%m%d-%H%M%S')-$(git log --format=%h -1)-${TRAVIS_BUILD_NUMBER}"
+    - git config --local user.name "lookfirst"
+    - git config --local user.email "latchkey@gmail.com"
+    - git tag "$(date '+%Y%m%d-%H%M%S')-$(git log --format=%h -1)-${TRAVIS_BUILD_NUMBER}"
     deploy:
       provider: releases
       file:
