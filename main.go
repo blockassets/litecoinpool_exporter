@@ -52,7 +52,7 @@ func overseerRun(port string, interval time.Duration) {
 	overseer.Run(overseer.Config{
 		Program: prog,
 		Address: port,
-		Debug: true,
+		Debug:   true,
 		Fetcher: &fetcher.Github{
 			User:     ghUser,
 			Repo:     ghRepo,
@@ -76,5 +76,10 @@ func prog(state overseer.State) {
 	prometheus.MustRegister(NewExporter(apiKey, *timeout))
 
 	http.Handle("/metrics", promhttp.Handler())
-	log.Fatal(http.Serve(state.Listener, nil))
+
+	if state.Listener != nil {
+		log.Fatal(http.Serve(state.Listener, nil))
+	} else {
+		log.Fatal(http.ListenAndServe(state.Address, nil))
+	}
 }
