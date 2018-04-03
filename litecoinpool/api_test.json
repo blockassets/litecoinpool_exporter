@@ -38,6 +38,7 @@
   "pool": {
 	"hash_rate": 28840000000,
 	"active_users": 9914,
+	"active_workers": 70000,
 	"total_work": "145016027186199134208",
 	"pps_ratio": 1.03,
 	"pps_rate": 1.05305e-10

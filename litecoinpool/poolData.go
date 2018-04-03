@@ -75,6 +75,7 @@ type Pool struct {
 	HashRate    int64 `json:"hash_rate"`
 	ActiveUsers int64 `json:"active_users"`
 	//TotalWork   string  `json:"total_work"`
+	ActiveWorkers int64 `json:"active_workers"`
 	PPSRatio float64 `json:"pps_ratio"`
 	PPSRate  float64 `json:"pps_rate"`
 }
