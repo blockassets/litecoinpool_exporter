@@ -53,9 +53,9 @@ type Worker struct {
 	Connected     bool    `json:"connected"`
 	HashRate      float64 `json:"hash_rate"`
 	HashRate24h   float64 `json:"hash_rate_24h"`
-	ValidShares   int64   `json:"valid_shares,string"`
-	StaleShares   int64   `json:"stale_shares,string"`
-	InvalidShares int64   `json:"invalid_shares,string"`
+	ValidShares   int64   `json:"valid_shares"`
+	StaleShares   int64   `json:"stale_shares"`
+	InvalidShares int64   `json:"invalid_shares"`
 	Rewards       float64 `json:"rewards"`
 	Rewards24h    float64 `json:"rewards_24h"`
 	LastShareTime int64   `json:"last_share_time"`
